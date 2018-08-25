@@ -44,9 +44,21 @@ var game = {
         }
     },
     start: () => {
+        rand = game.random()
         $(".welcome").fadeOut(500, function() {
             $("#game").fadeIn(2000)
-        })
+        });
+        setTimeout(function(){
+        if(stageLen < 5) {
+            $('.quesCon').html(game.stages.stage1.que[rand])
+            $('.options').html(game.stages.stage1.op[rand])
+        }else if(stageLen < 10) {
+            $('.quesCon').html(game.stages.stage2.que[rand])
+            $('.options').html(game.stages.stage2.op[rand]) 
+        }else{
+            $('.quesCon').html(game.stages.stage3.que[rand])
+            $('.options').html(game.stages.stage3.op[rand])
+        }},500)
     },
     check: (clicked) => {
         
