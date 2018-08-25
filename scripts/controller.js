@@ -94,6 +94,13 @@ var game = {
             alert(e);
         }
     },
+    loose: () => {
+        $(".wrong").fadeIn(800);
+        setTimeout(function(){$("#wrong").html("Sorry, you are wrong!!!<br>You are leaving with " + amount)},100)
+        setTimeout(function(){$(".wrong").fadeOut(function(){$("#wrong").html("")})}, 1500)
+        setTimeout(function(){game.reset()},1500)
+        
+    },
     about: () => {
         $('.about').fadeIn(1000);
     }
