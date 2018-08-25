@@ -9,3 +9,7 @@ var aud
 var call
 var fifty
 var play
+
+var game = {
+    
+}
