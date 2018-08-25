@@ -48,6 +48,19 @@ var game = {
             $("#game").fadeIn(2000)
         })
     },
+    random: () => {
+        try{
+            rand = Math.floor(Math.random()*3);
+            while(taken.toString().match(rand)){
+                rand = Math.floor(Math.random()*3);
+            }
+            taken.push(rand);
+            return rand;
+        }
+        catch(e){
+            alert(e);
+        }
+    },
     about: () => {
         $('.about').fadeIn(1000);
     }
