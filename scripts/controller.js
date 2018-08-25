@@ -1,14 +1,14 @@
-window.stageLen
-var taken
-var c
-window.gameLen
-window.pLen
-var amount
-window.rand
-var aud
-var call
-var fifty
-var play
+window.stageLen = 1;
+var taken = [];
+var c = 2
+window.gameLen = $(".stages button").length
+window.pLen = gameLen
+var amount = $(".stages button").eq(pLen-1).html();
+window.rand = Math.floor(Math.random()*3)
+var aud = true
+var call = true
+var fifty = true
+var play = true
 
 var game = {
     stages: {
