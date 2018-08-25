@@ -24,5 +24,7 @@ var game = {
             que: [],
             op: []
         }
+    },
+    start: () => {
     }
 }
