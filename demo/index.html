@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <script src="../scripts/jquery.js"></script>
+    <title>Who wants to be a millionaire</title>
+</head>
+<body>
+    <div id="game">
+        <div class="container">
+            <div class="name">
+                <h1>WHO WANTS TO BE A MILLIONAIRE</h1>
+            </div>
+            <div class="main">
+                <div class="que-ans">
+                    <div class="display">
+                        <p class="quesCon"></p>
+                    </div>
+                    <div class="options">
+                            <span class="A">A: </span>
+                            <span class="B">B: </span>
+                            <span class="C">C: </span>
+                            <span class="D">D: </span>
+                    </div>
+                </div>
+                <div class="aside">
+                    <div class="life-line">
+                        <img class="fifty" src="../img/fifty.png" onclick="game.fifty()">
+                        <img class="call" src="../img/call.png" onclick="game.call()">
+                        <img class="aud" src="../img/aud.png" onclick="game.aud()">
+                    </div>
+                    <div class="score">
+                        <p>Score:</p>
+                        <span class="score">$0</span>
+                    </div>
+                    <div class="stages">
+                        <button>$1 MILLION</button>
+                        <button>$500000</button>
+                        <button>$250000</button>
+                        <button>$125000</button>
+                        <button>$64000</button>
+                        <button>$32000</button>
+                        <button>$16000</button>
+                        <button>$8000</button>
+                        <button>$4000</button>
+                        <button>$2000</button>
+                        <button>$1000</button>
+                        <button>$500</button>
+                        <button>$300</button>
+                        <button>$200</button>
+                        <button class="current">$100</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="developer">
+            <p><a href="https://www.twitter.com/spatocode">SPATOCODE</a> - &copy;2018</p>
+        </div>
+    </div>
+    <div class="warning">
+        <p>Is that your final answer?</p>
+        <button class="yes">Yes</button>
+        <button class="no">No</button>
+    </div>
+    <div class="right">
+        <p id="right"></p>
+    </div>
+    <div class="wrong">
+        <p id="wrong"></p>
+    </div>
+    <div class="chatCon">
+        <p id="chat"></p>
+    </div>
+    <div class="audCon">
+        <div class="bar">
+            <div class="bar1"><p>A</p></div>
+            <div class="bar2"><p>B</p></div>
+            <div class="bar3"><p>C</p></div>
+            <div class="bar4"><p>D</p></div>
+        </div>
+    </div>
+    <script src="../scripts/controller.js"></script>
+</body>
+</html>
