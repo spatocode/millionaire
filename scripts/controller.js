@@ -29,5 +29,8 @@ var game = {
         $(".welcome").fadeOut(500, function() {
             $("#game").fadeIn(2000)
         })
+    },
+    about: () => {
+        $('.about').fadeIn(1000);
     }
 }
