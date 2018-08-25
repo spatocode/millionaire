@@ -61,7 +61,25 @@ var game = {
         }},500)
     },
     check: (clicked) => {
-        
+        if(play){
+            call = false, aud = false, fifty = false, play = false
+            $(".warning").fadeIn(500, function() {
+                $("#game").css("opacity","0.8")
+            });
+            $(".no").click(function() {
+                call = true, aud = true, fifty = true, play = true
+                $(".warning").fadeOut(function(){
+                    $("#game").css("opacity", "1")
+                })
+            });
+            $(".yes").click(function(){
+                $(".warning").fadeOut(500,function(){
+                    $("#game").css("opacity", "1")
+                    var correct = 2;
+                    (clicked == correct) ? game.won() : game.loose()
+                })
+            })
+        }
     },
     random: () => {
         try{
