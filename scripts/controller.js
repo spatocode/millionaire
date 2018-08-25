@@ -48,6 +48,9 @@ var game = {
             $("#game").fadeIn(2000)
         })
     },
+    check: (clicked) => {
+        
+    },
     random: () => {
         try{
             rand = Math.floor(Math.random()*3);
