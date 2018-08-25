@@ -26,5 +26,8 @@ var game = {
         }
     },
     start: () => {
+        $(".welcome").fadeOut(500, function() {
+            $("#game").fadeIn(2000)
+        })
     }
 }
