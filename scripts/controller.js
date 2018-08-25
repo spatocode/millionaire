@@ -11,5 +11,18 @@ var fifty
 var play
 
 var game = {
-    
+    stages: {
+        stage1: {
+            que: [],
+            op: []
+        },
+        stage2: {
+            que: [],
+            op:  []
+        },
+        stage3: {
+            que: [],
+            op: []
+        }
+    }
 }
