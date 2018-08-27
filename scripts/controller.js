@@ -94,12 +94,43 @@ var game = {
             alert(e);
         }
     },
+    won: () => {
+        if(stageLen <= 15) {
+            stageLen++
+            taken = stageLen%3 == 0 ? [] : taken;
+            amount = $(".stages button").eq(pLen-1).html();
+            $(".right").fadeIn(800);
+            setTimeout(function(){$("#right").html("You are right!!!")},500)
+            setTimeout(function(){$("#right").html("Congratulations!!! You just won " + amount)},1800)
+            setTimeout(function(){$("#right").html("Get ready for the next question")},3800)
+            setTimeout(function(){
+                $(".right").fadeOut(800, function() {
+                    $("#right").html("")
+                })}, 4500)
+            pLen--;
+            $(".current").removeClass("current");
+            $(".stages button").eq(pLen-1).addClass("current");
+            $(".score").html("Score: " + amount)
+            gameLen++;
+            setTimeout(function(){
+                game.start()
+                call = true, aud = true, fifty = true, play = true
+            },4500)
+        }else{
+            setTimeout(function(){$("#right").html("You are right!!!")},500)
+            setTimeout(function(){$("#right").html("Congratulations!!! You are now a millionaire")},1800)
+            setTimeout(function(){
+                $(".right").fadeOut(800, function() {
+                    $("#right").html("")
+                    game.reset()
+                })}, 2300)
+        }
+    },
     loose: () => {
         $(".wrong").fadeIn(800);
         setTimeout(function(){$("#wrong").html("Sorry, you are wrong!!!<br>You are leaving with " + amount)},100)
         setTimeout(function(){$(".wrong").fadeOut(function(){$("#wrong").html("")})}, 1500)
-        setTimeout(function(){game.reset()},1500)
-        
+        setTimeout(function(){game.reset()},1500)   
     },
     about: () => {
         $('.about').fadeIn(1000);
