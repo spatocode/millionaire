@@ -132,6 +132,57 @@ var game = {
         setTimeout(function(){$(".wrong").fadeOut(function(){$("#wrong").html("")})}, 1500)
         setTimeout(function(){game.reset()},1500)   
     },
+    fifty: () => {
+        if(fifty){
+            $(".fifty").attr({"src":"../img/fifty2.png","onclick":""}).css("cursor","default")
+            $(".fifty:hover").css("background-color","rgb(17, 17, 138)")
+            $(".del").html("&nbsp;&nbsp;&nbsp;").attr("onclick","")
+        }
+    },
+    call: () => {
+        if(call){
+            play = false, aud = false, fifty = false
+            var friend = ["Ogochukwu","Ekene","Emeka","Chimobi","Chidera","Chisom","Iweka"]
+            randFriend = Math.floor(Math.random()*7);
+            var randOpt = ["A","B","C","D"]
+            randAns = Math.floor(Math.random()*4);
+            var sure = ["100%","80%","60%","50%"]
+            var resp = ["It\'s certainly","I think it\'s","Am sure it\'s","It\'s definitely","Am not sure to choose"]
+            var randResp = Math.floor(Math.random()*5)
+            $(".call").attr({"src":"../img/call2.png","onclick":""}).css("cursor","default")
+            $(".call:hover").css("background-color","rgb(17, 17, 138)")
+            $(".chatCon").fadeIn(500,function(){$("#game").css("opacity","0.8")});
+            setTimeout(function(){$("#chat").html("Calling...")},100)
+            setTimeout(function(){$("#chat").html("Connected")},2000)
+            setTimeout(function(){$("#chat").html("ME: Hello "+friend[randFriend] +". Am in a hot seat now and i need the answer to this question.<br>"+$(".quesCon").html())},3800)
+            setTimeout(function(){$("#chat").html(friend[randFriend]+": Thinking...")},7000)
+            setTimeout(function(){$("#chat").html(friend[randFriend]+": "+resp[randResp]+", "+randOpt[randAns]+".")},10000)
+            setTimeout(function(){$("#chat").html("ME: How sure are you?")},13000)
+            setTimeout(function(){$("#chat").html(friend[randFriend]+": "+sure[randAns]+" sure.")},16000)
+            setTimeout(function(){
+                $(".chatCon").fadeOut(800, function() {
+                    $("#chat").html("")
+                    $("#game").css("opacity", "1")
+                    play = true
+                    aud = true
+                    fifty = true
+                })}, 18000)
+            }
+    },
+    aud: () => {
+        if(aud){
+            play = false, call = false, fifty = false
+            $(".aud").attr({"src":"../img/aud2.png","onclick":""}).css("cursor","default")
+            $(".aud:hover").css("background-color","rgb(17, 17, 138)")
+            $(".chatCon").fadeIn(500,function(){$("#game").css("opacity","0.8")})
+            setTimeout(function(){$("#chat").html("Throwing question to audience...")},100)
+            setTimeout(function(){$("#chat").html("Audience thinking...")},1200)
+            setTimeout(function(){
+                $(".audCon").fadeIn()
+                play = true, call = true, fifty = true},2700)
+
+        }
+    },
     about: () => {
         $('.about').fadeIn(1000);
     }
