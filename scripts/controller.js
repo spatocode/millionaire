@@ -183,6 +183,20 @@ var game = {
 
         }
     },
+    reset: () => {
+        $("#game").fadeOut()
+        setTimeout(function(){$(".welcome").fadeIn(600)},1000)
+        call = true, aud = true, fifty = true, play = true
+        window.stageLen = 1;
+        taken = [];
+        c = 2
+        window.gameLen = $(".stages button").length
+        window.pLen = gameLen
+        amount = $(".stages button").eq(pLen-1).html();
+        $("img:hover").css("background-color","rgb(250, 121, 0) !important")
+        $(".fifty").attr({"src":"../img/fifty.png","onClick":"game.fifty()"}).css("cursor","pointer")
+        $(".call").attr({"src":"../img/call.png","onClick":"game.call()"}).css("cursor","pointer")
+    },
     about: () => {
         $('.about').fadeIn(1000);
     }
