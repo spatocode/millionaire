@@ -1,147 +1,125 @@
+var welcome = $('.welcome')
+var game = $('#game')
+var question = $('.question')
+var options = $('.options')
+var warning = $('.warning')
+var yes = $(".yes")
+var no = $(".no")
+var right_wrapper = $('.right-wrapper')
+var right = $('#right')
+var wrong_wrapper = $('.wrong-wrapper')
+var wrong = $('#wrong')
+var chat = $('#chat')
+var chat_wrapper = $('.chat-wrapper')
 window.stageLen = 1;
+var selected
 var taken = [];
 var c = 2
 window.gameLen = $(".stages button").length
 window.pLen = gameLen
 var amount = $(".stages button").eq(pLen-1).html();
 window.rand = Math.floor(Math.random()*3)
-var aud = true
-var call = true
-var fifty = true
+var audience = true
+var call_a_friend = true
+var fifty_fifty = true
 var play = true
 
-var game = {
-    stages: {
-        stage1: {
-            que: ["Who is a software engineer?", "What is hacking?", "What is software?"],
-            op: [`<span onclick="game.check(c)" class="A">A: maintains computer softwares</span> 
-                <span onclick="game.check(4)" class="B del">B: dev maint</span> <span onclick="game.check(1)" class="C">C: softcfvb</span> <span onclick="game.check(3)" class="D del">D: bvccujhbfgv</span>`,
-                `<span onclick="game.check(4)" class="A del">A: A perso computer softwares</span> <span onclick="game.check(c)" class="B">B: tinker</span>
-                 <span class="C" onclick="game.check(4)">C: etggfbjm</span> <span onclick="game.check(3)" class="D del">D: assdcujhbfgv</span>`, 
-                 `<span onclick="game.check(3)" class="A del">A: A person who develops and </span> <span class="B" onclick="game.check(1)">B: A comp</span>
-                 <span onclick="game.check(1)" class="C del">C: etggfbjm</span> <span onclick="game.check(c)" class="D">D: inner</span>`
-            ]
-        },
-        stage2: {
-            que: ["Who is a software developer?", "What is computer?", "What is hardware"],
-        op:     [`<span onclick="game.check(c)" class="A">A: develops computer softwares</span> 
-                <span onclick="game.check(1)" class="B del">B: dev maint</span> <span onclick="game.check(3)" class="C del">C: softcfvb</span> <span onclick="game.check(4)" class="D">D: bvccujhbfgv</span>`,
-                `<span onclick="game.check(c)" class="A">A: idiot machine</span> <span onclick="game.check(1)" class="B del">B: A comp</span>
-                <span onclick="game.check(1)" class="C">C: etggfbjm</span> <span class="D del">D: assdcujhbfgv</span>`, 
-                `<span onclick="game.check(4)" class="A del">A: n who develops and maier softwares</span> <span class="B del">B: A comp</span>
-                <span onclick="game.check(3)" class="C">C: etggfbjm</span> <span onclick="game.check(c)" class="D">D: Hardware<span>`
-            ]
-        },
-        stage3: {
-            que: ["Where is motherboard located?", "What is the full meaning of G.P.U?", "What is the full meaning of HTTP?"],
-            op: [`<span onclick="game.check(c)" class="A">A: CPU</span> <span onclick="game.check(3)" class="B">B: dev maint</span> 
-                <span onclick="game.check(4)" class="C del">C: softcfvb</span> <span onclick="game.check(1)" class="D del">D: bvccujhbfgv</span>`,
-                `<span onclick="game.check(3)" class="A del">A: A person who develops and maintains computer softwares</span> 
-                <span onclick="game.check(4)" class="B">B: A comp</span> <span onclick="game.check(c)" class="C">C: GPU</span> <span onclick="game.check(3)" class="D del">D: assdcujhbfgv</span>`, 
-                `<span onclick="game.check(1)" class="A">A:  person who develops and</span> <span class="B del">B: A comp</span>
-                <span onclick="game.check(4)" class="C del">C: etggfbjm</span> <span onclick="game.check(c)" class="D">D: HTTPS`
-            ]
-        }
-    },
-    start: () => {
-        rand = game.random()
-        $(".welcome").fadeOut(500, function() {
-            $("#game").fadeIn(2000)
-        });
-        setTimeout(function(){
-        if(stageLen < 5) {
-            $('.quesCon').html(game.stages.stage1.que[rand])
-            $('.options').html(game.stages.stage1.op[rand])
-        }else if(stageLen < 10) {
-            $('.quesCon').html(game.stages.stage2.que[rand])
-            $('.options').html(game.stages.stage2.op[rand]) 
-        }else{
-            $('.quesCon').html(game.stages.stage3.que[rand])
-            $('.options').html(game.stages.stage3.op[rand])
-        }},500)
-    },
-    check: (clicked) => {
-        if(play){
-            call = false, aud = false, fifty = false, play = false
-            $(".warning").fadeIn(500, function() {
-                $("#game").css("opacity","0.8")
-            });
-            $(".no").click(function() {
-                call = true, aud = true, fifty = true, play = true
-                $(".warning").fadeOut(function(){
-                    $("#game").css("opacity", "1")
-                })
-            });
-            $(".yes").click(function(){
-                $(".warning").fadeOut(500,function(){
-                    $("#game").css("opacity", "1")
-                    var correct = 2;
-                    (clicked == correct) ? game.won() : game.loose()
-                })
-            })
-        }
-    },
-    random: () => {
-        try{
+function random(){
+    try{
+        rand = Math.floor(Math.random()*3);
+        while(taken.toString().match(rand)){
             rand = Math.floor(Math.random()*3);
-            while(taken.toString().match(rand)){
-                rand = Math.floor(Math.random()*3);
-            }
-            taken.push(rand);
-            return rand;
         }
-        catch(e){
-            alert(e);
+        taken.push(rand);
+        return rand;
+    }
+    catch(e){
+        alert(e);
+    }
+}
+
+var app = {
+    start_game: function start_game(){
+        rand = random()
+    
+            welcome.fadeOut(500, function() {
+                game.fadeIn(500)
+            });
+    
+            setTimeout(function(){
+                if(stageLen < 5) {
+                    question.html(stages.stage1.que[rand])
+                    options.html(stages.stage1.op[rand])
+                }else if(stageLen < 10) {
+                    question.html(stages.stage2.que[rand])
+                    options.html(stages.stage2.op[rand]) 
+                }else{
+                    question.html(stages.stage3.que[rand])
+                    options.html(stages.stage3.op[rand])
+                }
+            },500)
+    },
+    check: function check(clicked){
+        if(play){
+            call_a_friend = false, audience = false, fifty_fifty = false, play = false;
+            warning.fadeIn(500, function() {
+                game.css("opacity","0.8")
+            });
+            selected = clicked
         }
     },
-    won: () => {
+    won: function won(){
         if(stageLen <= 15) {
             stageLen++
             taken = stageLen%3 == 0 ? [] : taken;
             amount = $(".stages button").eq(pLen-1).html();
-            $(".right").fadeIn(800);
-            setTimeout(function(){$("#right").html("You are right!!!")},500)
-            setTimeout(function(){$("#right").html("Congratulations!!! You just won " + amount)},1800)
-            setTimeout(function(){$("#right").html("Get ready for the next question")},3800)
+    
+            right_wrapper.fadeIn(800);
+            setTimeout(function(){right.html("You are right!!!")},500)
+            setTimeout(function(){right.html("Congratulations!!! You just won " + amount)},1800)
+            setTimeout(function(){right.html("Get ready for the next question")},3800)
             setTimeout(function(){
-                $(".right").fadeOut(800, function() {
-                    $("#right").html("")
+                right_wrapper.fadeOut(800, function() {
+                    right.html("")
                 })}, 4500)
+    
             pLen--;
             $(".current").removeClass("current");
             $(".stages button").eq(pLen-1).addClass("current");
             $(".score").html("Score: " + amount)
             gameLen++;
+    
             setTimeout(function(){
-                game.start()
-                call = true, aud = true, fifty = true, play = true
+                app.start_game()
+                call_a_friend = true, audience = true, fifty_fifty = true, play = true
             },4500)
-        }else{
-            setTimeout(function(){$("#right").html("You are right!!!")},500)
-            setTimeout(function(){$("#right").html("Congratulations!!! You are now a millionaire")},1800)
+        }
+        else{
+            setTimeout(function(){right.html("You are right!!!")},500)
+            setTimeout(function(){right.html("Congratulations!!! You are now a millionaire")},1800)
             setTimeout(function(){
-                $(".right").fadeOut(800, function() {
-                    $("#right").html("")
-                    game.reset()
+                right_wrapper.fadeOut(800, function() {
+                    right.html("")
+                    reset()
                 })}, 2300)
         }
     },
-    loose: () => {
-        $(".wrong").fadeIn(800);
-        setTimeout(function(){$("#wrong").html("Sorry, you are wrong!!!<br>You are leaving with " + amount)},100)
-        setTimeout(function(){$(".wrong").fadeOut(function(){$("#wrong").html("")})}, 1500)
-        setTimeout(function(){game.reset()},1500)   
+    loose: function loose(){
+        wrong_wrapper.fadeIn(800);
+        setTimeout(function(){wrong.html("Sorry, you are wrong!!!<br>You are leaving with " + amount)},100)
+        setTimeout(function(){wrong.fadeOut(function(){wrong.html("")})}, 1500)
+        setTimeout(function(){reset()},1500) 
     },
-    fifty: () => {
-        if(fifty){
-            $(".fifty").attr({"src":"../img/fifty2.png","onclick":""}).css("cursor","default")
+    fifty: function fifty(){
+        if(fifty_fifty){
+            $(".fifty").attr({"src":"../images/fifty2.png","onclick":""}).css("cursor","default")
             $(".fifty:hover").css("background-color","rgb(17, 17, 138)")
             $(".del").html("&nbsp;&nbsp;&nbsp;").attr("onclick","")
         }
     },
-    call: () => {
-        if(call){
-            play = false, aud = false, fifty = false
+    call: function call(){
+        if(call_a_friend){
+            play = false, audience = false, fifty_fifty = false
             var friend = ["Ogochukwu","Ekene","Emeka","Chimobi","Chidera","Chisom","Iweka"]
             randFriend = Math.floor(Math.random()*7);
             var randOpt = ["A","B","C","D"]
@@ -149,55 +127,125 @@ var game = {
             var sure = ["100%","80%","60%","50%"]
             var resp = ["It\'s certainly","I think it\'s","Am sure it\'s","It\'s definitely","Am not sure to choose"]
             var randResp = Math.floor(Math.random()*5)
-            $(".call").attr({"src":"../img/call2.png","onclick":""}).css("cursor","default")
-            $(".call:hover").css("background-color","rgb(17, 17, 138)")
-            $(".chatCon").fadeIn(500,function(){$("#game").css("opacity","0.8")});
-            setTimeout(function(){$("#chat").html("Calling...")},100)
-            setTimeout(function(){$("#chat").html("Connected")},2000)
-            setTimeout(function(){$("#chat").html("ME: Hello "+friend[randFriend] +". Am in a hot seat now and i need the answer to this question.<br>"+$(".quesCon").html())},3800)
-            setTimeout(function(){$("#chat").html(friend[randFriend]+": Thinking...")},7000)
-            setTimeout(function(){$("#chat").html(friend[randFriend]+": "+resp[randResp]+", "+randOpt[randAns]+".")},10000)
-            setTimeout(function(){$("#chat").html("ME: How sure are you?")},13000)
-            setTimeout(function(){$("#chat").html(friend[randFriend]+": "+sure[randAns]+" sure.")},16000)
+    
+            $(".call_a_friend").attr({"src":"../images/call_a_friend2.png","onclick":""}).css("cursor","default")
+            $(".call_a_friend:hover").css("background-color","rgb(17, 17, 138)")
+            chat-wrapper.fadeIn(500,function(){game.css("opacity","0.8")});
+    
+            setTimeout(function(){chat.html("Call_a_friending...")},100)
+            setTimeout(function(){chat.html("Connected")},2000)
+            setTimeout(function(){chat.html("ME: Hello "+friend[randFriend] +". Am in a hot seat now and i need the answer to this question.<br>"+$(".quesCon").html())},3800)
+            setTimeout(function(){chat.html(friend[randFriend]+": Thinking...")},7000)
+            setTimeout(function(){chat.html(friend[randFriend]+": "+resp[randResp]+", "+randOpt[randAns]+".")},10000)
+            setTimeout(function(){chat.html("ME: How sure are you?")},13000)
+            setTimeout(function(){chat.html(friend[randFriend]+": "+sure[randAns]+" sure.")},16000)
             setTimeout(function(){
-                $(".chatCon").fadeOut(800, function() {
-                    $("#chat").html("")
-                    $("#game").css("opacity", "1")
+                chat-wrapper.fadeOut(800, function() {
+                    chat.html("")
+                    game.css("opacity", "1")
                     play = true
-                    aud = true
-                    fifty = true
+                    audience = true
+                    fifty_fifty = true
                 })}, 18000)
             }
     },
-    aud: () => {
-        if(aud){
-            play = false, call = false, fifty = false
-            $(".aud").attr({"src":"../img/aud2.png","onclick":""}).css("cursor","default")
+    audience: function aud(){
+        if(audience){
+            play = false, call_a_friend = false, fifty_fifty = false
+    
+            $(".aud").attr({"src":"../images/aud2.png","onclick":""}).css("cursor","default")
             $(".aud:hover").css("background-color","rgb(17, 17, 138)")
-            $(".chatCon").fadeIn(500,function(){$("#game").css("opacity","0.8")})
-            setTimeout(function(){$("#chat").html("Throwing question to audience...")},100)
-            setTimeout(function(){$("#chat").html("Audience thinking...")},1200)
+            $(".chat-wrapper").fadeIn(500,function(){$("#game").css("opacity","0.8")})
+            setTimeout(function(){chat.html("Throwing question to audience...")},100)
+            setTimeout(function(){chat.html("Audience thinking...")},1200)
             setTimeout(function(){
-                $(".audCon").fadeIn()
-                play = true, call = true, fifty = true},2700)
-
+                audience_wrapper.fadeIn()
+                play = true, call_a_friend = true, fifty_fifty = true},2700)
+    
         }
     },
-    reset: () => {
+    reset: function reset(){
         $("#game").fadeOut()
         setTimeout(function(){$(".welcome").fadeIn(600)},1000)
-        call = true, aud = true, fifty = true, play = true
+    
+        call_a_friend = true, audience = true, fifty_fifty = true, play = true
         window.stageLen = 1;
         taken = [];
         c = 2
         window.gameLen = $(".stages button").length
         window.pLen = gameLen
         amount = $(".stages button").eq(pLen-1).html();
+        
         $("img:hover").css("background-color","rgb(250, 121, 0) !important")
         $(".fifty").attr({"src":"../img/fifty.png","onClick":"game.fifty()"}).css("cursor","pointer")
-        $(".call").attr({"src":"../img/call.png","onClick":"game.call()"}).css("cursor","pointer")
-    },
-    about: () => {
-        $('.about').fadeIn(1000);
+        $(".call_a_friend").attr({"src":"../img/call_a_friend.png","onClick":"game.call_a_friend()"}).css("cursor","pointer")
     }
 }
+
+no.click(function() {
+    call_a_friend = true, audience = true, fifty_fifty = true, play = true
+    warning.fadeOut(function(){
+        game.css("opacity", "1")
+    })
+});
+
+yes.click(function(){
+    warning.fadeOut(500,function(){
+        game.css("opacity", "1")
+        var correct = 2;
+        (selected == correct) ? app.won() : app.loose()
+    })
+})
+
+const stages = {
+        stage1: {
+            que: ["Who is a software engineer?", "What is hacking?", "What is software?"],
+            op: [`<span onclick="app.check(c)" class="A">A: maintains computer softwares</span> 
+                <span onclick="app.check(4)" class="B del">B: dev maint</span> <span onclick="app.check(1)" class="C">C: softcfvb</span> <span onclick="app.check(3)" class="D del">D: bvccujhbfgv</span>`,
+                `<span onclick="app.check(4)" class="A del">A: A perso computer softwares</span> <span onclick="app.check(c)" class="B">B: tinker</span>
+                 <span class="C" onclick="app.check(4)">C: etggfbjm</span> <span onclick="app.check(3)" class="D del">D: assdcujhbfgv</span>`, 
+                 `<span onclick="app.check(3)" class="A del">A: A person who develops and </span> <span class="B" onclick="app.check(1)">B: A comp</span>
+                 <span onclick="app.check(1)" class="C del">C: etggfbjm</span> <span onclick="app.check(c)" class="D">D: inner</span>`
+            ]
+        },
+        stage2: {
+            que: ["Who is a software developer?", "What is computer?", "What is hardware"],
+        op:     [`<span onclick="app.check(c)" class="A">A: develops computer softwares</span> 
+                <span onclick="app.check(1)" class="B del">B: dev maint</span> <span onclick="app.check(3)" class="C del">C: softcfvb</span> <span onclick="app.check(4)" class="D">D: bvccujhbfgv</span>`,
+                `<span onclick="app.check(c)" class="A">A: idiot machine</span> <span onclick="app.check(1)" class="B del">B: A comp</span>
+                <span onclick="app.check(1)" class="C">C: etggfbjm</span> <span class="D del">D: assdcujhbfgv</span>`, 
+                `<span onclick="app.check(4)" class="A del">A: n who develops and maier softwares</span> <span class="B del">B: A comp</span>
+                <span onclick="app.check(3)" class="C">C: etggfbjm</span> <span onclick="app.check(c)" class="D">D: Hardware<span>`
+            ]
+        },
+        stage3: {
+            que: ["Where is motherboard located?", "What is the full meaning of G.P.U?", "What is the full meaning of HTTP?"],
+            op: [`<span onclick="app.check(c)" class="A">A: CPU</span> <span onclick="app.check(3)" class="B">B: dev maint</span> 
+                <span onclick="app.check(4)" class="C del">C: softcfvb</span> <span onclick="app.check(1)" class="D del">D: bvccujhbfgv</span>`,
+                `<span onclick="app.check(3)" class="A del">A: A person who develops and maintains computer softwares</span> 
+                <span onclick="app.check(4)" class="B">B: A comp</span> <span onclick="app.check(c)" class="C">C: GPU</span> <span onclick="app.check(3)" class="D del">D: assdcujhbfgv</span>`, 
+                `<span onclick="app.check(1)" class="A">A:  person who develops and</span> <span class="B del">B: A comp</span>
+                <span onclick="app.check(4)" class="C del">C: etggfbjm</span> <span onclick="app.check(c)" class="D">D: HTTPS`
+            ]
+        }
+    }
+
+$(".about-btn").click(function(){
+    $('.about').fadeIn(1000);
+})
+
+$(".fifty").click(function(){
+    app.fifty()
+})
+
+$(".call").click(function(){
+    app.call()
+})
+
+$(".aud").click(function(){
+    app.audience()
+})
+
+$(".start-btn").click(function(){
+    app.start_game()
+})
