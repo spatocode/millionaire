@@ -18,13 +18,13 @@
             </div>
             <div class="about">
                 <p>Application developed and compiled by <a href="https://twitter.com/spatocode">Ekene Izukanne</a><br>
-                    For any suggestion or error report contact me on <br>
-                    <a href="malito:ekeneizukanne.com">patrick@ekeneizukanne.com</a>
+                    For any suggestion or error report file an issue or make a PR on <br>
+                    <a href="https://github.com/Spatocode/WWTBAM/issues">Github</a>
                 </p>
             </div>
             <div class="main-buttons">
-                    <button onclick="game.start()">Start</button>
-                    <button onclick="game.about()">About</button>
+                    <button class="start-btn">Start</button>
+                    <button class="about-btn">About</button>
             </div>
         </div>
     <div id="game">
@@ -35,7 +35,7 @@
             <div class="main">
                 <div class="que-ans">
                     <div class="display">
-                        <p class="quesCon"></p>
+                        <p class="question"></p>
                     </div>
                     <div class="options">
                             <span class="A">A: </span>
@@ -46,9 +46,9 @@
                 </div>
                 <div class="aside">
                     <div class="life-line">
-                        <img class="fifty" src="../images/fifty.png" onclick="game.fifty()">
-                        <img class="call" src="../images/call.png" onclick="game.call()">
-                        <img class="aud" src="../images/aud.png" onclick="game.aud()">
+                        <img class="fifty" src="./images/fifty.png">
+                        <img class="call" src="./images/call.png">
+                        <img class="aud" src="./images/aud.png">
                     </div>
                     <div class="score">
                         <p>Score:</p>
@@ -83,16 +83,16 @@
         <button class="yes">Yes</button>
         <button class="no">No</button>
     </div>
-    <div class="right">
+    <div class="right-wrapper">
         <p id="right"></p>
     </div>
-    <div class="wrong">
+    <div class="wrong-wrapper">
         <p id="wrong"></p>
     </div>
-    <div class="chatCon">
+    <div class="chat-wrapper">
         <p id="chat"></p>
     </div>
-    <div class="audCon">
+    <div class="audience-wrapper">
         <div class="bar">
             <div class="bar1"><p>A</p></div>
             <div class="bar2"><p>B</p></div>
