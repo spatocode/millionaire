@@ -1,7 +1,7 @@
 let welcome = $('.welcome')
 let game = $('#game')
 let question = $('.question')
-let options = $('.options')
+let options = $(".options")
 let warning = $('.warning')
 let yes = $(".yes")
 let no = $(".no")
@@ -12,7 +12,6 @@ let wrong = $('#wrong')
 let chat = $('#chat')
 let chat_wrapper = $('.chat-wrapper')
 let stageLen = 1;
-let selected
 let taken = [];
 let c = 2
 let gameLength = $(".stages button").length
@@ -23,12 +22,14 @@ let audience = true
 let call_a_friend = true
 let fifty_fifty = true
 let play = true
+let selected
+let answer
 
 function random(){
     try{
-        rand = Math.floor(Math.random()*3);
+        rand = Math.floor(Math.random()*4);
         while(taken.toString().match(rand)){
-            rand = Math.floor(Math.random()*3);
+            rand = Math.floor(Math.random()*4);
         }
         taken.push(rand);
         return rand;
@@ -47,28 +48,38 @@ let app = {
             });
     
             setTimeout(
-                function(){
-                if(stageLen < 5) {
-                    question.html(stages.stage1.que[rand])
-                    options.html(stages.stage1.op[rand])
-                }else if(stageLen < 10) {
-                    question.html(stages.stage2.que[rand])
-                    options.html(stages.stage2.op[rand]) 
-                }else{
-                    question.html(stages.stage3.que[rand])
-                    options.html(stages.stage3.op[rand])
-                }
+                () => {
+                    var span
+                    if(stageLen < 5) {
+                        question.html(stages.stage1.data[rand]["question"])
+                        stages.stage1.data[rand]["options"].map((option, i) => {
+                            span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
+                            options.append(span)
+                        })
+                        $(".opt").click((e) => {
+                            selected = e.target.textContent.slice(0,1)
+                            this.check()
+                        })
+                        answer = stages.stage1.data[rand]["ans"]
+                    }else if(stageLen < 10) {
+                        question.html(stages.stage2.que[rand])
+                        stages.stage1.data[rand]["options"].map((option, i) => {
+                            span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
+                            options.append(span)
+                        })
+                    }else{
+                        question.html(stages.stage3.que[rand])
+                        stages.stage1.data[rand]["options"].map((option, i) => {
+                            span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
+                            options.append(span)
+                        })
+                    }
             },
             500)
     },
-    check: function check(clicked){
-        if(play){
-            call_a_friend = false, audience = false, fifty_fifty = false, play = false;
-            warning.fadeIn(500, function() {
-                game.css("opacity","0.8")
-            });
-            selected = clicked
-        }
+    check: function check(){
+        $(".warning").fadeIn(300)
+        game.css("opacity", "0.8");
     },
     won: function won(){
         if(stageLen <= 15) {
@@ -249,45 +260,11 @@ no.click(function() {
 yes.click(function(){
     warning.fadeOut(500,
         function(){
-            game.css("opacity", "1")
-            let correct = 2;
-            (selected == correct) ? app.won() : app.loose()
+            game.css("opacity", "1");
+            (selected == answer) ? app.won() : app.loose()
         }
     )
 })
-
-const stages = {
-        stage1: {
-            que: ["Who is a software engineer?", "What is hacking?", "What is software?"],
-            op: [`<span onclick="app.check(c)" class="A">A: maintains computer softwares</span> 
-                <span onclick="app.check(4)" class="B del">B: dev maint</span> <span onclick="app.check(1)" class="C">C: softcfvb</span> <span onclick="app.check(3)" class="D del">D: bvccujhbfgv</span>`,
-                `<span onclick="app.check(4)" class="A del">A: A perso computer softwares</span> <span onclick="app.check(c)" class="B">B: tinker</span>
-                 <span class="C" onclick="app.check(4)">C: etggfbjm</span> <span onclick="app.check(3)" class="D del">D: assdcujhbfgv</span>`, 
-                 `<span onclick="app.check(3)" class="A del">A: A person who develops and </span> <span class="B" onclick="app.check(1)">B: A comp</span>
-                 <span onclick="app.check(1)" class="C del">C: etggfbjm</span> <span onclick="app.check(c)" class="D">D: inner</span>`
-            ]
-        },
-        stage2: {
-            que: ["Who is a software developer?", "What is computer?", "What is hardware"],
-        op:     [`<span onclick="app.check(c)" class="A">A: develops computer softwares</span> 
-                <span onclick="app.check(1)" class="B del">B: dev maint</span> <span onclick="app.check(3)" class="C del">C: softcfvb</span> <span onclick="app.check(4)" class="D">D: bvccujhbfgv</span>`,
-                `<span onclick="app.check(c)" class="A">A: idiot machine</span> <span onclick="app.check(1)" class="B del">B: A comp</span>
-                <span onclick="app.check(1)" class="C">C: etggfbjm</span> <span class="D del">D: assdcujhbfgv</span>`, 
-                `<span onclick="app.check(4)" class="A del">A: n who develops and maier softwares</span> <span class="B del">B: A comp</span>
-                <span onclick="app.check(3)" class="C">C: etggfbjm</span> <span onclick="app.check(c)" class="D">D: Hardware<span>`
-            ]
-        },
-        stage3: {
-            que: ["Where is motherboard located?", "What is the full meaning of G.P.U?", "What is the full meaning of HTTP?"],
-            op: [`<span onclick="app.check(c)" class="A">A: CPU</span> <span onclick="app.check(3)" class="B">B: dev maint</span> 
-                <span onclick="app.check(4)" class="C del">C: softcfvb</span> <span onclick="app.check(1)" class="D del">D: bvccujhbfgv</span>`,
-                `<span onclick="app.check(3)" class="A del">A: A person who develops and maintains computer softwares</span> 
-                <span onclick="app.check(4)" class="B">B: A comp</span> <span onclick="app.check(c)" class="C">C: GPU</span> <span onclick="app.check(3)" class="D del">D: assdcujhbfgv</span>`, 
-                `<span onclick="app.check(1)" class="A">A:  person who develops and</span> <span class="B del">B: A comp</span>
-                <span onclick="app.check(4)" class="C del">C: etggfbjm</span> <span onclick="app.check(c)" class="D">D: HTTPS`
-            ]
-        }
-    }
 
 $(".about-btn").click(function(){
     $('.about').fadeIn(1000);
