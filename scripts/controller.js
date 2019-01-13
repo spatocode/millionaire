@@ -1,87 +1,103 @@
-let welcome = $('.welcome')
-let game = $('#game')
-let question = $('.question')
-let options = $(".options")
-let warning = $('.warning')
-let yes = $(".yes")
-let no = $(".no")
-let right_wrapper = $('.right-wrapper')
-let right = $('#right')
-let wrong_wrapper = $('.wrong-wrapper')
-let wrong = $('#wrong')
-let chat = $('#chat')
-let chat_wrapper = $('.chat-wrapper')
-let stageLen = 1;
-let taken = [];
-let c = 2
-let gameLength = $(".stages button").length
-let pLen = gameLength
-let amount = $(".stages button").eq(pLen-1).html();
-let rand = Math.floor(Math.random()*3)
-let audience = true
-let call_a_friend = true
-let fifty_fifty = true
-let play = true
-let selected
-let answer
+let welcome = $('.welcome'),
+    game = $('#game'),
+    question = $('.question'),
+    options = $(".options"),
+    warning = $('.warning'),
+    yes = $(".yes"),
+    no = $(".no"),
+    right_wrapper = $('.right-wrapper'),
+    right = $('#right'),
+    wrong_wrapper = $('.wrong-wrapper'),
+    wrong = $('#wrong'),
+    chat = $('#chat'),
+    chat_wrapper = $('.chat-wrapper'),
+    audience_wrapper = $('.audience-wrapper'),
+    stageLen = 1,
+    taken = [],
+    c = 2,
+    gameLength = $(".stages button").length,
+    pLen = gameLength,
+    amount = $(".stages button").eq(pLen-1).html(),
+    audience = true,
+    call_a_friend = true,
+    fifty_fifty = true,
+    play = true,
+    rand,
+    selected,
+    answer
 
-function random(){
-    try{
-        rand = Math.floor(Math.random()*4);
-        while(taken.toString().match(rand)){
-            rand = Math.floor(Math.random()*4);
+let millionaire = {
+    random: function(){
+        rand = Math.floor(Math.random()*6)
+        try{
+            while(taken.toString().match(rand)){
+                rand = Math.floor(Math.random()*6);
+            }
+            taken.push(rand);
+            console.log(taken)
+            console.log(rand)
+            return rand;
         }
-        taken.push(rand);
-        return rand;
-    }
-    catch(e){
-        alert(e);
-    }
-}
-
-let app = {
-    start_game: function start_game(){
-        rand = random()
+        catch(e){
+            alert(e);
+        }
+    },
     
+    selectQuestion: function(){
+        var span
+        rand = random()
+            if(stageLen < 5) {
+                question.html(stages.stage1.data[rand]["question"])
+                stages.stage1.data[rand]["options"].map((option, i) => {
+                    span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
+                    options.append(span)
+                })
+                $(".opt").click((e) => {
+                    selected = e.target.textContent.slice(0,1)
+                    app.check()
+                })
+                answer = stages.stage1.data[rand]["ans"]
+            }
+            else if(stageLen < 10) {
+                question.html(stages.stage2.que[rand])
+                stages.stage2.data[rand]["options"].map((option, i) => {
+                    span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
+                    options.append(span)
+                })
+                $(".opt").click((e) => {
+                    selected = e.target.textContent.slice(0,1)
+                    app.check()
+                })
+                answer = stages.stage2.data[rand]["ans"]
+            }
+            else{
+                question.html(stages.stage3.que[rand])
+                stages.stage3.data[rand]["options"].map((option, i) => {
+                    span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
+                    options.append(span)
+                })
+                $(".opt").click((e) => {
+                    selected = e.target.textContent.slice(0,1)
+                    app.check()
+                })
+                answer = stages.stage3.data[rand]["ans"]
+            }
+    },
+
+    startGame: function(){
             welcome.fadeOut(500, function() {
                 game.fadeIn(500)
             });
     
-            setTimeout(
-                () => {
-                    var span
-                    if(stageLen < 5) {
-                        question.html(stages.stage1.data[rand]["question"])
-                        stages.stage1.data[rand]["options"].map((option, i) => {
-                            span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
-                            options.append(span)
-                        })
-                        $(".opt").click((e) => {
-                            selected = e.target.textContent.slice(0,1)
-                            this.check()
-                        })
-                        answer = stages.stage1.data[rand]["ans"]
-                    }else if(stageLen < 10) {
-                        question.html(stages.stage2.que[rand])
-                        stages.stage1.data[rand]["options"].map((option, i) => {
-                            span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
-                            options.append(span)
-                        })
-                    }else{
-                        question.html(stages.stage3.que[rand])
-                        stages.stage1.data[rand]["options"].map((option, i) => {
-                            span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
-                            options.append(span)
-                        })
-                    }
-            },
-            500)
+            selectQuestion()
     },
-    check: function check(){
+
+    check: function (){
         $(".warning").fadeIn(300)
         game.css("opacity", "0.8");
     },
-    won: function won(){
+
+    won: function(){
         if(stageLen <= 15) {
             stageLen++
             taken = stageLen%3 == 0 ? [] : taken;
@@ -103,7 +119,7 @@ let app = {
             gameLength++;
     
             setTimeout(() => {
-                this.start_game()
+                selectQuestion()
                 call_a_friend = true, audience = true, fifty_fifty = true, play = true
             },
             4500)
@@ -121,7 +137,8 @@ let app = {
                  2300)
         }
     },
-    loose: function loose(){
+
+    loose: function(){
         wrong_wrapper.fadeIn(800);
 
         setTimeout(
@@ -136,14 +153,15 @@ let app = {
         
         setTimeout(() => { this.reset() }, 1500) 
     },
-    fifty: function fifty(){
+
+    fifty: function(){
         if(fifty_fifty){
             $(".fifty").attr({"src":"../images/fifty2.png","onclick":""}).css("cursor","default")
             $(".fifty:hover").css("background-color","rgb(17, 17, 138)")
             $(".del").html("&nbsp;&nbsp;&nbsp;").attr("onclick","")
         }
     },
-    call: function call(){
+    call: function(){
         if(call_a_friend){
             play = false, audience = false, fifty_fifty = false
             let friend = ["Ogochukwu","Ekene","Emeka","Chimobi","Chidera","Chisom","Iweka"]
@@ -202,7 +220,8 @@ let app = {
                 , 18000)
             }
     },
-    audience: function aud(){
+
+    audience: function(){
         if(audience){
             play = false, call_a_friend = false, fifty_fifty = false
     
@@ -226,7 +245,8 @@ let app = {
             ,2700)
         }
     },
-    reset: function reset(){
+    
+    reset: function(){
         $("#game").fadeOut()
 
         setTimeout(
