@@ -2,12 +2,12 @@ var stages = {
     stage1: {
         data: [
             {
-              "question": "What is the full meaning of PHP?",
+              "question": "Photoelectric effect is associated with?",
               "options": [
-                "A: Hypertext Preprocessor",
-                "B: Pre Hypertext Processor",
-                "C: Page High Power",
-                "D: Power High Page",
+                "A: Non-Metals",
+                "B: Gases",
+                "C: Metals",
+                "D: Photosynthesis",
               ],
               "ans": "A"
             },
@@ -52,14 +52,24 @@ var stages = {
               "ans": "A"
             },
             {
-              "question": "Which of these is not a framework for building Android application?",
+              "question": "Colourless and odourless is the property of?",
               "options": [
-                "A: React Native",
-                "B: Ionic",
-                "C: Phonegap",
-                "D: Kotlin",
+                "A: Calcium",
+                "B: Ammonium",
+                "C: Chlorine",
+                "D: Methane",
               ],
               "ans": "D"
+            },
+            {
+              "question": "Who created the C programming language?",
+              "options": [
+                "A: Ken Jones",
+                "B: Dennis Ritchie",
+                "C: Bjarnne Stautroup",
+                "D: Tom Smith",
+              ],
+              "ans": "B"
             }
         ]
     },
@@ -76,42 +86,42 @@ var stages = {
             "ans": "A"
           },
           {
-            "question": "Which of these is not a JavaScript library?",
+            "question": "In JavaScript which is an abstract data type?",
             "options": [
-              "A: jQuery",
-              "B: Angular",
-              "C: React",
-              "D: Ember",
+              "A: Array",
+              "B: List",
+              "C: Symbol",
+              "D: String",
            ],
            "ans": "B"
           },
           {
-            "question": "Which is a CSS framework?",
+            "question": "Which is a PHP framework?",
             "options": [
-              "A: Popper",
-              "B: Modernizr",
+              "A: Composer",
+              "B: WebGl",
               "C: Bootstrap",
-              "D: Sass",
-            ],
-            "ans": "C"
-          },
-          {
-            "question": "Which language is synonymous to closure?",
-            "options": [
-              "A: Python",
-              "B: Hash",
-              "C: C++",
-              "D: JavaScript",
+              "D: Laravel",
             ],
             "ans": "D"
           },
           {
-            "question": "Who is the creator of Python?",
+            "question": "Which is the largest country by population?",
             "options": [
-              "A: Guido van Rossium",
-              "B: Brendan Eich",
-              "C: Google Inc",
-              "D: Dan Abrahmov",
+              "A: Russia",
+              "B: United States of America",
+              "C: China",
+              "D: Japan",
+            ],
+            "ans": "C"
+          },
+          {
+            "question": "Flourine element is known as?",
+            "options": [
+              "A: Halogen",
+              "B: Ester",
+              "C: Rare gas",
+              "D: Ethanol",
             ],
             "ans": "A"
           },
@@ -124,68 +134,88 @@ var stages = {
               "D: Kotlin",
             ],
             "ans": "D"
+          },
+          {
+            "question": "Which of these is not a metal?",
+            "options": [
+              "A: Calcium",
+              "B: Aluminium",
+              "C: Argon",
+              "D: Sodium",
+            ],
+            "ans": "C"
           }
       ]
   },
   stage3: {
     data: [
         {
-          "question": "What is the full meaning of PHP?",
+          "question": "Chai is a tool used for?",
           "options": [
-            "A: Hypertext Preprocessor",
-            "B: Pre Hypertext Processor",
-            "C: Page High Power",
-            "D: Power High Page",
+            "A: Testing",
+            "B: Module bundling",
+            "C: Designing",
+            "D: Data Science",
           ],
           "ans": "A"
         },
         {
-          "question": "Which of these is not a JavaScript library?",
+          "question": "Which is not used for module bundling and task running?",
           "options": [
-            "A: jQuery",
-            "B: Angular",
-            "C: React",
-            "D: Ember",
+            "A: Webpack",
+            "B: Mocha",
+            "C: Gulp",
+            "D: Grunt",
          ],
          "ans": "B"
         },
         {
-          "question": "Which is a CSS framework?",
+          "question": "Tkinter is a python library used for?",
           "options": [
-            "A: Popper",
-            "B: Modernizr",
-            "C: Bootstrap",
-            "D: Sass",
+            "A: Artificial Intelligence",
+            "B: Machine Learning",
+            "C: Desktop development",
+            "D: Mobile development",
           ],
           "ans": "C"
         },
         {
-          "question": "Which language is synonymous to closure?",
+          "question": "Golang was created at?",
           "options": [
-            "A: Python",
-            "B: Hash",
-            "C: C++",
-            "D: JavaScript",
+            "A: Facebook",
+            "B: Zeit",
+            "C: Microsoft",
+            "D: Google",
           ],
           "ans": "D"
         },
         {
-          "question": "Who is the creator of Python?",
+          "question": "Scrapy is a framework used for?",
           "options": [
-            "A: Guido van Rossium",
-            "B: Brendan Eich",
-            "C: Google Inc",
-            "D: Dan Abrahmov",
+            "A: Web crawling",
+            "B: Game development",
+            "C: Designing",
+            "D: Web development",
           ],
           "ans": "A"
         },
         {
-          "question": "Which of these is not a framework for building Android application?",
+          "question": "Nodejs is usually known for its?",
           "options": [
-            "A: React Native",
-            "B: Ionic",
-            "C: Phonegap",
-            "D: Kotlin",
+            "A: Speed",
+            "B: Efficiency",
+            "C: Simplicity",
+            "D: Asyncronousity",
+          ],
+          "ans": "D"
+        },
+        {
+          "question": "The largest planet is?",
+          "options": [
+            "A: Saturn",
+            "B: Jupiter",
+            "C: Earth",
+            "D: Uranium",
           ],
           "ans": "D"
         }
