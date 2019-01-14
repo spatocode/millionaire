@@ -205,6 +205,20 @@ img:hover {
 .score p{
     display: inline;
 }
+.modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    background:rgba(12, 12, 12, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
 .warning{
     background-color: rgb(2, 2, 250);
     width: 300px;
@@ -215,7 +229,6 @@ img:hover {
     position: absolute;
     top: 180px;
     left: 500px;
-    display: none;
 }
 .warning p{
     font-size: 18px;
