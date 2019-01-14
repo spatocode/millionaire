@@ -9,7 +9,7 @@ var stages = {
                 "C: Metals",
                 "D: Photosynthesis",
               ],
-              "ans": "A"
+              "ans": "C"
             },
             {
               "question": "Which of these is not a JavaScript library?",
@@ -17,7 +17,7 @@ var stages = {
                 "A: jQuery",
                 "B: Angular",
                 "C: React",
-                "D: Ember",
+                "D: Immutablejs",
              ],
              "ans": "B"
             },
@@ -100,7 +100,7 @@ var stages = {
             "options": [
               "A: Composer",
               "B: WebGl",
-              "C: Bootstrap",
+              "C: Mongoose",
               "D: Laravel",
             ],
             "ans": "D"
@@ -217,7 +217,7 @@ var stages = {
             "C: Earth",
             "D: Uranium",
           ],
-          "ans": "D"
+          "ans": "B"
         }
     ]
   }

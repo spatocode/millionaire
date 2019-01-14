@@ -1,16 +1,4 @@
-let welcome = $('.welcome'),
-    game = $('#game'),
-    question = $('.question'),
-    options = $(".options"),
-    warning = $('.warning'),
-    right_wrapper = $('.right-wrapper'),
-    right = $('#right'),
-    wrong_wrapper = $('.wrong-wrapper'),
-    wrong = $('#wrong'),
-    chat = $('#chat'),
-    chat_wrapper = $('.chat-wrapper'),
-    audience_wrapper = $('.audience-wrapper'),
-    stageLen = 1,
+let stageLen = 1,
     taken = [],
     c = 2,
     gameLength = $(".stages button").length,
@@ -41,11 +29,11 @@ let millionaire = {
     selectQuestion: function(){
         var span, rand
         rand = this.random()
-            if(stageLen <= 5) {
-                question.html(stages.stage1.data[rand]["question"])
+            if(stageLen < 6) {
+                $('.question').html(stages.stage1.data[rand]["question"])
                 stages.stage1.data[rand]["options"].map((option, i) => {
                     span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
-                    options.append(span)
+                    $(".options").append(span)
                 })
 
                 $(".opt").click((e) => {
@@ -55,11 +43,11 @@ let millionaire = {
 
                 answer = stages.stage1.data[rand]["ans"]
             }
-            else if(stageLen <= 10) {
-                question.html(stages.stage2.data[rand]["question"])
+            else if(stageLen < 12) {
+                $('.question').html(stages.stage2.data[rand]["question"])
                 stages.stage2.data[rand]["options"].map((option, i) => {
                     span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
-                    options.append(span)
+                    $(".options").append(span)
                 })
 
                 $(".opt").click((e) => {
@@ -70,10 +58,10 @@ let millionaire = {
                 answer = stages.stage2.data[rand]["ans"]
             }
             else{
-                question.html(stages.stage3.data[rand]["question"])
+                $('.question').html(stages.stage3.data[rand]["question"])
                 stages.stage3.data[rand]["options"].map((option, i) => {
                     span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
-                    options.append(span)
+                    $(".options").append(span)
                 })
 
                 $(".opt").click((e) => {
@@ -86,30 +74,31 @@ let millionaire = {
     },
 
     start: function(){
-            welcome.fadeOut(500, function() {
-                game.fadeIn(500)
+        $('.welcome').fadeOut(500, function() {
+            $('#game').fadeIn(500)
             });
             this.selectQuestion()
     },
 
     check: function (){
+        $(".modal").fadeIn(300);
         $(".warning").fadeIn(300)
-        game.css("opacity", "0.8");
     },
 
     won: function(){
-        if(stageLen <= 15) {
+        if(stageLen < 15) {
             stageLen++
-            taken = stageLen%6 == 0 ? [] : taken;
+            taken = (stageLen%6 == 0) || (stageLen%11 == 0) ? [] : taken;
             amount = $(".stages button").eq(pLen-1).html();
     
-            right_wrapper.fadeIn(800);
-            setTimeout(function(){right.html("You are right!!!")},500)
-            setTimeout(function(){right.html("Congratulations!!! You just won " + amount)},1800)
-            setTimeout(function(){right.html("Get ready for the next question")},3800)
+            $('.right-wrapper').fadeIn(800);
+            setTimeout(function(){$('#right').html("You are right!!!")},500)
+            setTimeout(function(){$('#right').html("Congratulations!!! You just won " + amount)},1800)
+            setTimeout(function(){$('#right').html("Get ready for the next question")},3800)
             setTimeout(function(){
-                right_wrapper.fadeOut(800, function() {
-                    right.html("")
+                $('.right-wrapper').fadeOut(800, function() {
+                    $('#right').html("")
+                    $(".modal").fadeOut()
                 })}, 4500)
     
             pLen--;
@@ -120,30 +109,33 @@ let millionaire = {
     
             setTimeout(() => {
                 this.selectQuestion()
-                call_a_friend = true, audience = true, fifty_fifty = true, play = true
             }, 4500)
         }
         else{
-            setTimeout(function(){right.html("You are right!!!")},500)
-            setTimeout(function(){right.html("Congratulations!!! You are now a millionaire")},1800)
+            $('.right-wrapper').fadeIn(800);
+            setTimeout(function(){$('#right').html("You are right!!!")},500)
+            setTimeout(function(){$('#right').html("Congratulations!!! You are now a millionaire")},1800)
             setTimeout(() => {
-                right_wrapper.fadeOut(800, () => {
-                    right.html("")
+                $('.right-wrapper').fadeOut(800, () => {
+                    $('#right').html("")
                     this.reset()
                 })}, 2300)
         }
     },
 
     loose: function(){
-        wrong_wrapper.fadeIn(800);
+        $('.wrong-wrapper').fadeIn(800);
 
         setTimeout(
-            function(){wrong.html(`Sorry, you are wrong!!!<br>You are leaving with ${amount}`)}
+            function(){$('#wrong').html(`Sorry, you are wrong!!!<br>You are leaving with ${amount}`)}
         ,100)
 
         setTimeout(
             function(){
-                wrong_wrapper.fadeOut(function(){wrong.html("")})
+                $('.wrong-wrapper').fadeOut(function(){
+                    $('#wrong').html("")
+                    $(".modal").fadeOut(800)
+                })
             }
         ,1500)
         
@@ -169,44 +161,44 @@ let millionaire = {
     
             $(".call").attr({"src":"../images/call2.png","onclick":""}).css("cursor","default")
             $(".call:hover").css("background-color","rgb(17, 17, 138)")
-            chat_wrapper.fadeIn(500,function(){game.css("opacity","0.8")});
+            $('.chat-wrapper').fadeIn(500,function(){$('#game').css("opacity","0.8")});
     
             setTimeout(() => {
-                chat.html("Calling...")
+                $('#chat').html("Calling...")
             },100)
 
             setTimeout(() => {
-                chat.html("Connected")
+                $('#chat').html("Connected")
             },2000)
 
             setTimeout(
                 function(){
-                chat.html(`ME: Hello ${friend[randFriend]}. Am in a hot seat now and i need the answer to this question.<br>${question.html()}`)
+                    $('#chat').html(`ME: Hello ${friend[randFriend]}. Am in a hot seat now and i need the answer to this question.<br>${$('.question').html()}`)
             }
             ,3800)
             
             setTimeout(
-                function(){chat.html(`${friend[randFriend]}: Thinking...`)
+                function(){$('#chat').html(`${friend[randFriend]}: Thinking...`)
             }
             ,7000)
 
             setTimeout(
-                function(){chat.html(`${friend[randFriend]} ${resp[randResp]}, ${randOpt[randAns]}.`)}
+                function(){$('#chat').html(`${friend[randFriend]} ${resp[randResp]}, ${randOpt[randAns]}.`)}
             ,10000)
 
             setTimeout(
-                function(){chat.html("ME: How sure are you?")}
+                function(){$('#chat').html("ME: How sure are you?")}
             ,13000)
 
             setTimeout(
-                function(){chat.html(`${friend[randFriend]}: ${sure[randAns]} sure.`)}
+                function(){$('#chat').html(`${friend[randFriend]}: ${sure[randAns]} sure.`)}
             ,16000)
             
             setTimeout(
                 function(){
-                    chat_wrapper.fadeOut(800, function() {
-                        chat.html("")
-                        game.css("opacity", "1")
+                    $('.chat-wrapper').fadeOut(800, function() {
+                        $('#chat').html("")
+                        $('#game').css("opacity", "1")
                         play = true
                         audience = true
                         fifty_fifty = true
@@ -225,16 +217,16 @@ let millionaire = {
             $(".chat_wrapper").fadeIn(500,function(){$("#game").css("opacity","0.8")})
             
             setTimeout(
-                function(){chat.html("Throwing question to audience...")}
+                function(){$('#chat').html("Throwing question to audience...")}
             ,100)
 
             setTimeout(
-                function(){chat.html("Audience thinking...")}
+                function(){$('#chat').html("Audience thinking...")}
             ,1200)
 
             setTimeout(
                 function(){
-                audience_wrapper.fadeIn()
+                    $('.audience-wrapper').fadeIn()
                 play = true, call_a_friend = true, fifty_fifty = true
                 }
             ,2700)
@@ -242,6 +234,7 @@ let millionaire = {
     },
     
     reset: function(){
+        $(".modal").fadeOut()
         $("#game").fadeOut()
 
         setTimeout(
@@ -265,17 +258,12 @@ let millionaire = {
 
 $(".no").click(function() {
     call_a_friend = true, audience = true, fifty_fifty = true, play = true
-    warning.fadeOut(
-        function(){
-            game.css("opacity", "1")
-        }
-    )
+    $(".modal").fadeOut()
 });
 
 $(".yes").click(function(){
-    warning.fadeOut(500,
+    $('.warning').fadeOut(500,
         function(){
-            game.css("opacity", "1");
             (selected == answer) ? millionaire.won() :millionaire.loose()
         }
     )
