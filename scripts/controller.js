@@ -3,8 +3,6 @@ let welcome = $('.welcome'),
     question = $('.question'),
     options = $(".options"),
     warning = $('.warning'),
-    yes = $(".yes"),
-    no = $(".no"),
     right_wrapper = $('.right-wrapper'),
     right = $('#right'),
     wrong_wrapper = $('.wrong-wrapper'),
@@ -22,74 +20,76 @@ let welcome = $('.welcome'),
     call_a_friend = true,
     fifty_fifty = true,
     play = true,
-    rand,
     selected,
     answer
 
 let millionaire = {
     random: function(){
-        rand = Math.floor(Math.random()*6)
+        var rand = Math.floor(Math.random()*7)
         try{
             while(taken.toString().match(rand)){
-                rand = Math.floor(Math.random()*6);
+                rand = Math.floor(Math.random()*7);
             }
             taken.push(rand);
             console.log(taken)
             console.log(rand)
             return rand;
         }
-        catch(e){
-            alert(e);
-        }
+        catch(e){}
     },
-    
+
     selectQuestion: function(){
-        var span
-        rand = random()
-            if(stageLen < 5) {
+        var span, rand
+        rand = this.random()
+            if(stageLen <= 5) {
                 question.html(stages.stage1.data[rand]["question"])
                 stages.stage1.data[rand]["options"].map((option, i) => {
                     span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
                     options.append(span)
                 })
+
                 $(".opt").click((e) => {
                     selected = e.target.textContent.slice(0,1)
-                    app.check()
+                    this.check()
                 })
+
                 answer = stages.stage1.data[rand]["ans"]
             }
-            else if(stageLen < 10) {
-                question.html(stages.stage2.que[rand])
+            else if(stageLen <= 10) {
+                question.html(stages.stage2.data[rand]["question"])
                 stages.stage2.data[rand]["options"].map((option, i) => {
                     span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
                     options.append(span)
                 })
+
                 $(".opt").click((e) => {
                     selected = e.target.textContent.slice(0,1)
-                    app.check()
+                    this.check()
                 })
+
                 answer = stages.stage2.data[rand]["ans"]
             }
             else{
-                question.html(stages.stage3.que[rand])
+                question.html(stages.stage3.data[rand]["question"])
                 stages.stage3.data[rand]["options"].map((option, i) => {
                     span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
                     options.append(span)
                 })
+
                 $(".opt").click((e) => {
                     selected = e.target.textContent.slice(0,1)
-                    app.check()
+                    this.check()
                 })
+
                 answer = stages.stage3.data[rand]["ans"]
             }
     },
 
-    startGame: function(){
+    start: function(){
             welcome.fadeOut(500, function() {
                 game.fadeIn(500)
             });
-    
-            selectQuestion()
+            this.selectQuestion()
     },
 
     check: function (){
@@ -100,7 +100,7 @@ let millionaire = {
     won: function(){
         if(stageLen <= 15) {
             stageLen++
-            taken = stageLen%3 == 0 ? [] : taken;
+            taken = stageLen%6 == 0 ? [] : taken;
             amount = $(".stages button").eq(pLen-1).html();
     
             right_wrapper.fadeIn(800);
@@ -119,22 +119,18 @@ let millionaire = {
             gameLength++;
     
             setTimeout(() => {
-                selectQuestion()
+                this.selectQuestion()
                 call_a_friend = true, audience = true, fifty_fifty = true, play = true
-            },
-            4500)
+            }, 4500)
         }
         else{
             setTimeout(function(){right.html("You are right!!!")},500)
             setTimeout(function(){right.html("Congratulations!!! You are now a millionaire")},1800)
-            setTimeout(
-                () => {
-                    right_wrapper.fadeOut(800, () => {
-                        right.html("")
-                        this.reset()
-                    })
-                },
-                 2300)
+            setTimeout(() => {
+                right_wrapper.fadeOut(800, () => {
+                    right.html("")
+                    this.reset()
+                })}, 2300)
         }
     },
 
@@ -156,9 +152,8 @@ let millionaire = {
 
     fifty: function(){
         if(fifty_fifty){
-            $(".fifty").attr({"src":"../images/fifty2.png","onclick":""}).css("cursor","default")
+            $(".fifty").attr({"src":"../images/fifty2.png"}).css("cursor","default")
             $(".fifty:hover").css("background-color","rgb(17, 17, 138)")
-            $(".del").html("&nbsp;&nbsp;&nbsp;").attr("onclick","")
         }
     },
     call: function(){
@@ -263,12 +258,12 @@ let millionaire = {
         amount = $(".stages button").eq(pLen-1).html();
         
         $("img:hover").css("background-color","rgb(250, 121, 0) !important")
-        $(".fifty").attr({"src":"../img/fifty.png","onClick":"game.fifty()"}).css("cursor","pointer")
-        $(".call_a_friend").attr({"src":"../img/call_a_friend.png","onClick":"game.call_a_friend()"}).css("cursor","pointer")
+        $(".fifty").attr({"src":"../images/fifty.png","onClick":"game.fifty()"}).css("cursor","pointer")
+        $(".call_a_friend").attr({"src":"../images/call.png","onClick":"game.call_a_friend()"}).css("cursor","pointer")
     }
 }
 
-no.click(function() {
+$(".no").click(function() {
     call_a_friend = true, audience = true, fifty_fifty = true, play = true
     warning.fadeOut(
         function(){
@@ -277,11 +272,11 @@ no.click(function() {
     )
 });
 
-yes.click(function(){
+$(".yes").click(function(){
     warning.fadeOut(500,
         function(){
             game.css("opacity", "1");
-            (selected == answer) ? app.won() : app.loose()
+            (selected == answer) ? millionaire.won() :millionaire.loose()
         }
     )
 })
@@ -291,17 +286,17 @@ $(".about-btn").click(function(){
 })
 
 $(".fifty").click(function(){
-    app.fifty()
+    millionaire.fifty()
 })
 
 $(".call").click(function(){
-    app.call()
+    millionaire.call()
 })
 
 $(".aud").click(function(){
-    app.audience()
+    millionaire.audience()
 })
 
 $(".start-btn").click(function(){
-    app.start_game()
+    millionaire.start()
 })
