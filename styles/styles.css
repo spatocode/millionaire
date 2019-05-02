@@ -104,7 +104,7 @@ html, body {
     border-radius: 10px;
     width: 270px;
     position: absolute;
-    bottom: 220px;
+    bottom: 190px;
     
 }
 .B {
@@ -115,7 +115,7 @@ html, body {
     border-radius: 10px;
     width: 270px;
     position: absolute;
-    bottom: 220px;
+    bottom: 190px;
     left: 605px;
     
 }
@@ -128,7 +128,7 @@ html, body {
     border-radius: 10px;
     width: 270px;
     position: absolute;
-    bottom: 170px;
+    bottom: 140px;
 }
 .D {
     background-color: rgb(17, 17, 138);
@@ -138,7 +138,7 @@ html, body {
     border-radius: 10px;
     width: 270px;
     position: absolute;
-    bottom: 170px;
+    bottom: 140px;
     left: 605px;
 }
 .options span:hover{
