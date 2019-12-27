@@ -32,14 +32,14 @@ var stages = {
               "ans": "C"
             },
             {
-              "question": "Which language is synonymous to closure?",
+              "question": "Which language is closer to the hardware?",
               "options": [
                 "A: Python",
                 "B: Hash",
                 "C: C++",
                 "D: JavaScript",
               ],
-              "ans": "D"
+              "ans": "C"
             },
             {
               "question": "Who is the creator of Python?",
@@ -194,7 +194,7 @@ var stages = {
           "options": [
             "A: Web crawling",
             "B: Game development",
-            "C: Designing",
+            "C: Network sniffing",
             "D: Web development",
           ],
           "ans": "A"
