@@ -11,18 +11,27 @@ let stageLen = 1,
     selected,
     answer
 
+/**
+  * The millionaire game object
+  */
 let millionaire = {
+  /**
+   * Returns a random number from 1 to 6, which is used 
+   * for selection of game data. This function also makes 
+   * sure a number is not selected twice.
+   */
   random: function(){
     var rand = Math.floor(Math.random()*7)
     try{
         while(taken.toString().match(rand)){
-            rand = Math.floor(Math.random()*7);
+          rand = Math.floor(Math.random()*7);
         }
         taken.push(rand);
         return rand;
     }
     catch(e){}
   },
+
 
   /**
    * Choose question from data
@@ -79,8 +88,9 @@ let millionaire = {
     }
   },
 
+
   /**
-   * Start game
+   * Start the game
    */
   start: function(){
       $('.welcome').fadeOut(500, function() {
@@ -88,6 +98,7 @@ let millionaire = {
       });
       this.selectQuestion()
   },
+
 
   /**
    * Show congratulation message
@@ -131,6 +142,7 @@ let millionaire = {
     }
   },
 
+
   /**
    * Show loose message
    */
@@ -152,6 +164,7 @@ let millionaire = {
         
     setTimeout(() => { this.reset() }, 1500) 
   },
+
 
   /**
    * Activate fifty fifty lifeline
@@ -175,68 +188,70 @@ let millionaire = {
     }
   },
 
+
   /**
    * Activate call a friend
    */
   call: function(){
-      let randFriend = Math.floor(Math.random()*7);
-      let randResp = Math.floor(Math.random()*4)
-      let friend = ["Ngozi","Ekene","Chioma","Kenneth","Bright","Chisom","Adaeze"]
-      let sure = ["100%","80%","60%","50%", "30%"]
-      let resp = ["Am sure it\'s","It\'s certainly","It\'s definitely","I think it\'s", "Am not sure to choose"]
-    
-      $(".call").attr({"src":"../images/call2.png"}).css("cursor","default")
-      $(".call:hover").css("background-color","rgb(17, 17, 138)")
-      $(".modal").fadeIn()
-      $('.chat-wrapper').fadeIn(500);
-    
-      setTimeout(() => {
-        $('#chat').html("Calling... ☎")
-      },100)
+    let randFriend = Math.floor(Math.random()*7);
+    let randResp = Math.floor(Math.random()*4)
+    let friend = ["Ngozi","Ekene","Chioma","Kenneth","Bright","Chisom","Adaeze"]
+    let sure = ["100%","80%","60%","50%", "30%"]
+    let resp = ["Am sure it\'s","It\'s certainly","It\'s definitely","I think it\'s", "Am not sure to choose"]
+  
+    $(".call").attr({"src":"../images/call2.png"}).css("cursor","default")
+    $(".call:hover").css("background-color","rgb(17, 17, 138)")
+    $(".modal").fadeIn()
+    $('.chat-wrapper').fadeIn(500);
+  
+    setTimeout(() => {
+      $('#chat').html("Calling... ☎")
+    },100)
 
-      setTimeout(() => {
-        $('#chat').html("Connected ✔")
-      },2000)
+    setTimeout(() => {
+      $('#chat').html("Connected ✔")
+    },2000)
 
-      setTimeout(
-        function(){
-          $('#chat').html(`ME: Hello ${friend[randFriend]}. 😞 Am in a hot seat now and i need the answer to this question.<br>${$('.question').html()}`)
-        }
-      ,3800)
-            
-      setTimeout(
-        function(){
-          $('#chat').html(`${friend[randFriend]}: Thinking...`)
-        }
-      ,7000)
+    setTimeout(
+      function(){
+        $('#chat').html(`ME: Hello ${friend[randFriend]}. 😞 Am in a hot seat now and i need the answer to this question.<br>${$('.question').html()}`)
+      }
+    ,3800)
+          
+    setTimeout(
+      function(){
+        $('#chat').html(`${friend[randFriend]}: Thinking...`)
+      }
+    ,7000)
 
-      setTimeout(
-        function(){
-          $('#chat').html(`${friend[randFriend]}: ${resp[randResp]} ${answer}.`)
-        }
-      ,10000)
+    setTimeout(
+      function(){
+        $('#chat').html(`${friend[randFriend]}: ${resp[randResp]} ${answer}.`)
+      }
+    ,10000)
 
-      setTimeout(
-        function(){
-          $('#chat').html("ME: How sure are you?")
-        }
-      ,13000)
+    setTimeout(
+      function(){
+        $('#chat').html("ME: How sure are you?")
+      }
+    ,13000)
 
-      setTimeout(
-        function(){
-          $('#chat').html(`${friend[randFriend]}: ${sure[randResp]} sure.`)
-        }
-      ,16000)
-            
-      setTimeout(
-        function(){
-          $('.chat-wrapper').fadeOut(800, function() {
-            $('#chat').html("")
-            $(".modal").fadeOut()
-            call_a_friend = false
-          })
-      }, 18000)
+    setTimeout(
+      function(){
+        $('#chat').html(`${friend[randFriend]}: ${sure[randResp]} sure.`)
+      }
+    ,16000)
+          
+    setTimeout(
+      function(){
+        $('.chat-wrapper').fadeOut(800, function() {
+          $('#chat').html("")
+          $(".modal").fadeOut()
+          call_a_friend = false
+        })
+    }, 18000)
   },
+
 
   /**
    * Activate audience lifeline
@@ -281,6 +296,7 @@ let millionaire = {
     })
   },
 
+
   /**
    * Reset game. This is called when you either finished with a win or lost
    */
@@ -306,6 +322,7 @@ let millionaire = {
     $(".call_a_friend").attr({"src":"../images/call.png","onClick":"game.call_a_friend()"}).css("cursor","pointer")
   }
 }
+
 
 /**
  * Mouse event handlers
