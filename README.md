@@ -14,14 +14,14 @@ The web version of who wants to be a millionaire game.
 ## Features
 
 * Game progress bar
-* Call a friend option
-* Fifty fifty option
+* Call a friend lifeline option
+* Fifty lifeline fifty option
+* Audience lifeline option
 
 
 ## Todo List
 
 * Sound/Music implementation
-* Audience option
 * Inclusion of more questions
 * Inclusion of player name
 
