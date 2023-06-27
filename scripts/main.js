@@ -37,15 +37,15 @@ let millionaire = {
    * Choose question from data
    */
   selectQuestion: function(){
-    var span, rand
+    var div, rand
     rand = this.random()
 
     // Change stage data at every stage length of 6
     if(stageLen < 6) {
       $('.question').html(stages.stage1.data[rand]["question"])
       stages.stage1.data[rand]["options"].map((option, i) => {
-        span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
-        $(".options").append(span)
+        div = `<div class="${option.slice(0,1)} opt" key="${i}">${option}</div>`
+        $(".options").append(div)
       })
 
       $(".opt").click((e) => {
@@ -59,8 +59,8 @@ let millionaire = {
     else if(stageLen < 12) {
       $('.question').html(stages.stage2.data[rand]["question"])
       stages.stage2.data[rand]["options"].map((option, i) => {
-        span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
-        $(".options").append(span)
+        div = `<div class="${option.slice(0,1)} opt" key="${i}">${option}</div>`
+        $(".options").append(div)
       })
 
       $(".opt").click((e) => {
@@ -74,8 +74,8 @@ let millionaire = {
     else{
       $('.question').html(stages.stage3.data[rand]["question"])
       stages.stage3.data[rand]["options"].map((option, i) => {
-        span = `<span class="${option.slice(0,1)} opt" key="${i}">${option}</span>`
-        $(".options").append(span)
+        div = `<div class="${option.slice(0,1)} opt" key="${i}">${option}</div>`
+        $(".options").append(div)
       })
 
       $(".opt").click((e) => {
@@ -181,7 +181,7 @@ let millionaire = {
         if(removedOptions.length < 2){
           removedOptions.push(options[i])
           for(var i = 0; i < removedOptions.length; i++){
-            $(`span.${removedOptions[i]}`).html(`${removedOptions[i]}:`)
+            $(`div.${removedOptions[i]}`).html(`${removedOptions[i]}:`)
           }
         }
       }

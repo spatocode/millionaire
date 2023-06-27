@@ -1,115 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="styles/styles.css">
     <script src="scripts/jquery.js"></script>
     <title>Who wants to be a millionaire</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="welcome">
-            <div class="name">
-                <h1>WHO WANTS TO BE A MILLIONAIRE</h1>
-            </div>
-            <div class="wel-main">
-                <p>Welcome to the web version of who wants to be a millionaire</p>
-            </div>
-            <div class="about">
-                <p>Application developed and compiled by <a href="https://spatocode.com">Ekene Izukanne</a>.<br>
-                    For any suggestion or error report file an <a href="https://github.com/spatocode/millionaire/issues">issue</a> 
-                    or make a PR on <br>
-                    <a href="https://github.com/spatocode/millionaire">Github</a>.
-                </p>
-            </div>
-            <div class="main-buttons">
-                    <button class="start-btn">Start</button>
-                    <button class="about-btn">About</button>
-            </div>
+      <div class="welcome-content">
+        <div class="name">
+          <h1>WHO WANTS TO BE A MILLIONAIRE</h1>
         </div>
+        <div class="wel-main">
+          <p>Welcome to the web version of who wants to be a millionaire</p>
+        </div>
+        <div class="about">
+          <p>Application developed and designed by <a href="https://spatocode.com">Ekene Izukanne</a>.<br>
+            For any suggestion or error report file an <a href="https://github.com/spatocode/millionaire/issues">issue</a> 
+            or make a PR on <br>
+            <a href="https://github.com/spatocode/millionaire">Github</a>.
+          </p>
+        </div>
+        <div class="main-buttons">
+          <button class="start-btn">Start</button>
+          <button class="about-btn">About</button>
+        </div>
+      </div>
+    </div>
     <div id="game">
-        <div class="container">
-            <div class="name">
-                <h1>WHO WANTS TO BE A MILLIONAIRE</h1>
-            </div>
-            <div class="main">
-                <div class="que-ans">
-                    <div class="display">
-                        <p class="question"></p>
-                    </div>
-                    <div class="options"></div>
-                </div>
-                <div class="aside">
-                    <div class="life-line">
-                        <img class="fifty" src="images/fifty.png">
-                        <img class="call" src="images/call.png">
-                        <img class="aud" src="images/aud.png">
-                    </div>
-                    <div class="score">
-                        <p>Score:</p>
-                        <span class="score">$0</span>
-                    </div>
-                    <div class="stages">
-                        <button>$1 MILLION</button>
-                        <button>$500000</button>
-                        <button>$250000</button>
-                        <button>$125000</button>
-                        <button>$64000</button>
-                        <button>$32000</button>
-                        <button>$16000</button>
-                        <button>$8000</button>
-                        <button>$4000</button>
-                        <button>$2000</button>
-                        <button>$1000</button>
-                        <button>$500</button>
-                        <button>$300</button>
-                        <button>$200</button>
-                        <button class="current">$100</button>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="name">
+          <h1>WHO WANTS TO BE A MILLIONAIRE</h1>
         </div>
-        <div class="developer">
-            <p><a href="https://www.spatocode.com">SPATOCODE</a> - &copy;2018</p>
+        <div class="main">
+          <div class="que-ans">
+            <div class="display">
+              <p class="question"></p>
+            </div>
+            <div class="options"></div>
+          </div>
+          <div class="aside">
+            <div class="life-line">
+              <img class="fifty" src="images/fifty.png">
+              <img class="call" src="images/call.png">
+              <img class="aud" src="images/aud.png">
+            </div>
+            <div class="score">
+              <p>Score:</p>
+              <span class="score">$0</span>
+            </div>
+            <div class="stages">
+              <button>$1 MILLION</button>
+              <button>$500000</button>
+              <button>$250000</button>
+              <button>$125000</button>
+              <button>$64000</button>
+              <button>$32000</button>
+              <button>$16000</button>
+              <button>$8000</button>
+              <button>$4000</button>
+              <button>$2000</button>
+              <button>$1000</button>
+              <button>$500</button>
+              <button>$300</button>
+              <button>$200</button>
+              <button class="current">$100</button>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="developer">
+        <p><a href="https://www.spatocode.com">SPATOCODE</a> - &copy;2018</p>
+      </div>
     </div>
     <div class="modal">
-        <div class="warning">
-            <p>Is that your final answer?</p>
-            <button class="yes">Yes</button>
-            <button class="no">No</button>
+      <div class="warning">
+        <p>Is that your final answer?</p>
+        <button class="yes">Yes</button>
+        <button class="no">No</button>
+      </div>
+      <div class="right-wrapper">
+        <p id="right"></p>
+      </div>
+      <div class="wrong-wrapper">
+        <p id="wrong"></p>
+      </div>
+      <div class="chat-wrapper">
+        <p id="chat"></p>
+      </div>
+      <div class="audience-wrapper">
+        <div class="bar">
+          <div class="bar-item-container">
+            <div class="bar-A">A</div>
+          </div>
+          <div class="bar-item-container">
+            <div class="bar-B">B</div>
+          </div>
+          <div class="bar-item-container">
+            <div class="bar-C">C</div>
+          </div>
+          <div class="bar-item-container">
+            <div class="bar-D">D</div>
+          </div>
         </div>
-        <div class="right-wrapper">
-            <p id="right"></p>
+        <div class="close">
+          <button class="closeBtn">close</button>
         </div>
-        <div class="wrong-wrapper">
-            <p id="wrong"></p>
-        </div>
-        <div class="chat-wrapper">
-            <p id="chat"></p>
-        </div>
-        <div class="audience-wrapper">
-            <div class="bar">
-                <div class="bar-item-container">
-                    <div class="bar-A">A</div>
-                </div>
-                <div class="bar-item-container">
-                    <div class="bar-B">B</div>
-                </div>
-                <div class="bar-item-container">
-                    <div class="bar-C">C</div>
-                </div>
-                <div class="bar-item-container">
-                    <div class="bar-D">D</div>
-                </div>
-            </div>
-            <div class="close">
-                <button class="closeBtn">close</button>
-            </div>
-        </div>
+      </div>
     </div>
     <script src="scripts/data.js"></script>
     <script src="scripts/main.js"></script>
-</body>
+  </body>
 </html>
