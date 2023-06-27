@@ -42,6 +42,7 @@ let millionaire = {
 
     // Change stage data at every stage length of 6
     if(stageLen < 6) {
+      $(".options").empty()
       $('.question').html(stages.stage1.data[rand]["question"])
       stages.stage1.data[rand]["options"].map((option, i) => {
         div = `<div class="${option.slice(0,1)} opt" key="${i}">${option}</div>`
@@ -57,6 +58,7 @@ let millionaire = {
       answer = stages.stage1.data[rand]["ans"]
     }
     else if(stageLen < 12) {
+      $(".options").empty()
       $('.question').html(stages.stage2.data[rand]["question"])
       stages.stage2.data[rand]["options"].map((option, i) => {
         div = `<div class="${option.slice(0,1)} opt" key="${i}">${option}</div>`
@@ -72,6 +74,7 @@ let millionaire = {
       answer = stages.stage2.data[rand]["ans"]
     }
     else{
+      $(".options").empty()
       $('.question').html(stages.stage3.data[rand]["question"])
       stages.stage3.data[rand]["options"].map((option, i) => {
         div = `<div class="${option.slice(0,1)} opt" key="${i}">${option}</div>`
