@@ -135,7 +135,7 @@ class Game {
   fiftyFiftyLifeline() {
     var options = ["D", "A", "C", "B"]
     var removedOptions = []
-    $(".fifty").attr({"src":"../images/fifty2.png"}).css("cursor","default")
+    $(".fifty").attr({"src":"images/fifty2.png"}).css("cursor","default")
     $(".fifty:hover").css("background-color","rgb(17, 17, 138)")
     this.enableFiftyFiftyLifeline = false
 
@@ -168,7 +168,7 @@ class Game {
     let confidencePercentage = ["100%", "80%", "60%", "50%", "30%"]
     let responseMessage = ["Am sure it's", "It's certainly", "It's definitely", "I think it's", "Am not sure to choose"]
 
-    $(".call").attr({"src":"../images/call2.png"}).css("cursor","default")
+    $(".call").attr({"src":"images/call2.png"}).css("cursor","default")
     $(".call:hover").css("background-color", "rgb(17, 17, 138)")
     $(".modal").fadeIn()
     $('.chat-wrapper').fadeIn(500);
@@ -209,7 +209,7 @@ class Game {
   }
 
   askAudienceLifeline() {
-    $(".aud").attr({"src":"../images/aud2.png"}).css("cursor","default")
+    $(".aud").attr({"src":"images/aud2.png"}).css("cursor","default")
     $(".aud:hover").css("background-color","rgb(17, 17, 138)")
     $(".modal").fadeIn()
     $(".chat-wrapper").fadeIn(500)
@@ -267,8 +267,8 @@ class Game {
     this.amount = $(".stages button").eq(this.pLen-1).html();
         
     $("img:hover").css("background-color","rgb(250, 121, 0) !important")
-    $(".fifty").attr({"src":"../images/fifty.png","onClick":"game.fifty()"}).css("cursor","pointer")
-    $(".callFriend").attr({"src":"../images/call.png","onClick":"game.call_a_friend()"}).css("cursor","pointer")
+    $(".fifty").attr({"src":"images/fifty.png","onClick":"game.fifty()"}).css("cursor","pointer")
+    $(".callFriend").attr({"src":"images/call.png","onClick":"game.call_a_friend()"}).css("cursor","pointer")
   }
 }
 
